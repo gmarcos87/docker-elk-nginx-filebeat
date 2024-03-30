@@ -87,7 +87,6 @@ services:
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     restart: always
-    container_name: letsencrypt-nginx
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "nginx-conf-volume:/etc/nginx/conf.d"
@@ -96,6 +95,8 @@ services:
       - "nginx-certs-volume:/etc/nginx/certs:rw"
     depends_on:
       - nginx
+    networks:
+      - nginx-proxy
 
   filebeat:
     build: ./filebeat

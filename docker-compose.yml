@@ -115,7 +115,7 @@ services:
 
 networks:
   nginx-proxy:
-    driver: bridge
+    name: nginx-proxychange
 
 volumes:
   nginx-conf-volume:

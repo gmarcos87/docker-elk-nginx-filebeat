@@ -38,7 +38,7 @@ services:
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
-      - "5005:5000"
+      - "5000:5000"
       - "9600:9600"
     expose:
       - "5044"

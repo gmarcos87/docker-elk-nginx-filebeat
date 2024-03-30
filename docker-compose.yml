@@ -106,7 +106,6 @@ services:
     networks:
       - nginx-proxy
     depends_on:
-      - app
       - nginx
       - logstash
       - elasticsearch

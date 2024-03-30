@@ -8,7 +8,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: /data/compose/55/elasticsearch/config/elasticsearch.yml
+        source: /volume1/docker/nginx/docker-elk-nginx-filebeat/elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - type: volume
@@ -30,11 +30,11 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: /data/compose/55/logstash/config/logstash.yml
+        source: /volume1/docker/nginx/docker-elk-nginx-filebeat/logstash/config/logstash.yml
         target: /usr/share/logstash/config/logstash.yml
         read_only: true
       - type: bind
-        source: /data/compose/55/logstash/pipeline
+        source: /volume1/docker/nginx/docker-elk-nginx-filebeat/logstash/pipeline
         target: /usr/share/logstash/pipeline
         read_only: true
     ports:
@@ -56,7 +56,7 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - type: bind
-        source: /data/compose/55/kibana/config/kibana.yml
+        source: /volume1/docker/nginx/docker-elk-nginx-filebeat/kibana/config/kibana.yml
         target: /usr/share/kibana/config/kibana.yml
         read_only: true
     ports:
@@ -98,10 +98,10 @@ services:
       - nginx
 
   filebeat:
-    build: /data/compose/55/filebeat
+    build: ./filebeat
     entrypoint: "filebeat -e -strict.perms=false"
     volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /volume1/docker/nginx/docker-elk-nginx-filebeat/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - "nginx-logs-volume:/var/log/nginx"
     networks:
       - nginx-proxy

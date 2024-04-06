@@ -122,6 +122,7 @@ services:
 networks:
   nginx-proxy:
     name: nginx-proxy
+    external: true
   vlan:
     driver: macvlan
     driver_opts:

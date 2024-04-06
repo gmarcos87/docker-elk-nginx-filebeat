@@ -124,10 +124,8 @@ networks:
     name: nginx-proxy
     external: true
   vlan:
-    driver: macvlan
-    driver_opts:
-      parent: ovs_eth0
-
+    name: dhcp-dns_vlan
+    external: true
 volumes:
   nginx-conf-volume:
     driver: local

@@ -75,8 +75,7 @@ services:
     networks:
       vlan:
         ipv4_address: 192.168.178.61
-      default:
-        name: nginx-proxy
+      nginx-proxy:
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:

@@ -73,7 +73,9 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      - nginx-proxy
+      nginx-proxy:
+      vlan:
+        ipv4_address: 192.168.178.61
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:
@@ -108,11 +110,7 @@ services:
       - /volume1/docker/nginx/docker-elk-nginx-filebeat/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - "nginx-logs-volume:/var/log/nginx"
     networks:
-      nginx-proxy:
-        name: nginx-proxy
-        external: true
-      vlan:
-        ipv4_address: 192.168.178.61
+      - nginx-proxy
     depends_on:
       - nginx
       - logstash
@@ -122,6 +120,8 @@ services:
       - logstash
 
 networks:
+  nginx-proxy:
+    name: nginx-proxy
   vlan:
     driver: macvlan
     driver_opts:

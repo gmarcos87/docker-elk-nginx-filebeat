@@ -108,9 +108,11 @@ services:
       - /volume1/docker/nginx/docker-elk-nginx-filebeat/filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - "nginx-logs-volume:/var/log/nginx"
     networks:
-      - nginx-proxy
-      - vlan:
+      vlan:
         ipv4_address: 192.168.178.61
+      default:
+        external:
+          name: nginx-proxy
     depends_on:
       - nginx
       - logstash

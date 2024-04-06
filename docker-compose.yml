@@ -73,11 +73,10 @@ services:
       - "80:80"
       - "443:443"
     networks:
-      nginx-proxy:
-        external:
-          name: nginx-proxy
       vlan:
         ipv4_address: 192.168.178.61
+      default:
+        - nginx-proxy
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
     environment:

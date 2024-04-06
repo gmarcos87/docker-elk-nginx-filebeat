@@ -76,6 +76,9 @@ services:
       - nginx-proxy
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+    environment:
+      - LOG_FORMAT=$$host $$remote_addr - $$remote_user [$$time_local] "$$request" $$status $$body_bytes_sent "$$http_referer" "$$http_user_agent" "$$upstream_addr"
+
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - "nginx-conf-volume:/etc/nginx/conf.d"
@@ -106,6 +109,8 @@ services:
       - "nginx-logs-volume:/var/log/nginx"
     networks:
       - nginx-proxy
+      - vlan:
+        ipv4_address: 192.168.178.61
     depends_on:
       - nginx
       - logstash
@@ -117,6 +122,10 @@ services:
 networks:
   nginx-proxy:
     name: nginx-proxy
+  vlan:
+    driver: macvlan
+    driver_opts:
+      parent: ovs_eth0
 
 volumes:
   nginx-conf-volume:
